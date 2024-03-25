@@ -13,9 +13,6 @@ function Student(name, gender, age) {
         if (this.excluded) {
             console.log("Невозможность добавлять оценки отчисленному студенту");
         } else {
-        if (!this.marks) {
-            this.marks = [];
-          }
           this.marks.push(...marksToAdd);
     }
     }
@@ -23,10 +20,10 @@ function Student(name, gender, age) {
     Student.prototype.getAverage = function () {
         if (!this.marks || this.marks.length === 0) {
             return 0;
-          } else {
+          } 
             const sum = this.marks.reduce((total, mark) => total + mark, 0);
             return sum / this.marks.length;
-          }
+  
     }
 
     Student.prototype.exclude = function (reason) {
