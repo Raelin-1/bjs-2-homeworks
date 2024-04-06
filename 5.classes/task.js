@@ -34,7 +34,7 @@ class PrintEditionItem {
   }
   
   class Book extends PrintEditionItem {
-    constructor(author, name, releaseDate, pagesCount) {
+    constructor(author, name, releaseDate, pagesCount) {  //порядок другой для закрытия автотестов
       super(name, releaseDate, pagesCount);
       this.author = author;
       this.type = 'book';
@@ -75,23 +75,15 @@ class PrintEditionItem {
     }
   
     findBookBy(type, value) {
-      for (let i = 0; i < this.books.length; i++) {
-        let book = this.books[i];
-        if (book[type] === value) {
-          return book;
-        }
-      }
-      return null;
+      const findResult = this.books.find((item) => item[type] === value);
+      return findResult || null;
     }
-  
-    giveBookByName(bookName) {
-      for (let i = 0; i < this.books.length; i++) {
-        let book = this.books[i];
-        if (book.name === bookName) {
-          this.books.splice(i, 1);
-          return book;
-        }
-      }
-      return null;
+
+  giveBookByName(bookName) {
+    const book = this.findBookBy("name", bookName);
+    if (!book) return null;
+    this.books = this.books.filter((item) => item.name !== bookName);
+    return book;
     }
   }
+  
